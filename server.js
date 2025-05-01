@@ -26,9 +26,24 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 
-app.use(
-    cors()
-);
+const allowedOrigins = ["https://mern-ecomm-pink.vercel.app"];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    // Allow the specific origins
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true, // This is crucial for allowing cookies/auth headers
+  optionsSuccessStatus: 200 // Optional: Some legacy browsers choke on 204
+};
+
+app.use(cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());
