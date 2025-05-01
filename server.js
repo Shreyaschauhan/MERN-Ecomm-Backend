@@ -27,18 +27,7 @@ const PORT = process.env.PORT || 5000;
 
 
 app.use(
-    cors({
-        origin: 'http://localhost:5173',
-        methods: ['GET', 'POST', 'DELETE', 'PUT'],
-        allowedHeaders: [
-            "content-Type",
-            'Authorizzation',
-            'Cache-Control',
-            'Expires',
-            'pragma'
-        ],
-        credentials : true,
-    })
+    cors()
 );
 
 app.use(cookieParser());
