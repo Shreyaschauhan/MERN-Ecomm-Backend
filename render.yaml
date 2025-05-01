@@ -1,0 +1,8 @@
+services:
+  # Node.js web service
+  - type: web
+    plan: free
+    name: MERN-Ecommerce
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
